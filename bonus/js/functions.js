@@ -1,4 +1,25 @@
 /**
+ * Funzione per cambiare il formato della data. Esempio: 01-20-1995 ----> 20/01/1995
+ *
+ * @param {Object[]} arr - Array da cui prendere la data di ciascun post.
+ * @param {string} date - Chiave dell'oggetto nell'array che restituisce la data.
+ * @return {string} La funzione restituisce la data formattata.
+ */
+const getNewFormatDate = (arr, date) => {
+    const oldDate = arr[date];
+    
+    const day = oldDate.slice(3,5);
+    const month = oldDate.slice(0,2);
+    const year = oldDate.slice(6);
+    
+    const newDate = `${day}/${month}/${year}`;
+
+    return newDate;
+}
+
+//! ---------------------------------------
+
+/**
  * Funzione per creare la card di un post, utilizzando le proprietà dell'array contenente i post
  *
  * @param {Object[]} arr - Array da cui prendere i parametri dei post.
@@ -11,10 +32,13 @@
  * @param {number} likes - Likes del post.
  * @return {string} La funzione restituisce la stranga HTML della card montata.
  */
-const createCard = (arr, id, pic, name, date, text, img, likes) => {
-    let card = "";
+const createCard = (arr, id, pic, name, text, img, likes) => {
 
+    let card = "";
+    
     for (const item of arr){
+        const newDate = getNewFormatDate(item, 'datePost');
+
         card += `
         <div class="post">
             <div class="post__header">
@@ -24,7 +48,7 @@ const createCard = (arr, id, pic, name, date, text, img, likes) => {
                 </div>
                 <div class="post-meta__data">
                 <div class="post-meta__author">${item[name]}</div>
-                <div class="post-meta__time">${item[date]}</div>
+                <div class="post-meta__time">${newDate}</div>
                 </div>
             </div>
             </div>
