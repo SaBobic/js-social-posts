@@ -1,3 +1,7 @@
+// # Variabili globali
+
+const listElement = document.getElementById('container'); // Row che contiene le card
+
 // # Milestone 1
 // Creiamo il nostro array di oggetti che rappresentano ciascun post.
 
@@ -54,10 +58,18 @@ const posts = [
 // # Milestone 2
 // Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed
 
-const listElement = document.getElementById('container');
 
 listElement.innerHTML = createCard(posts, 'idPost', 'imgProfile', 'nameProfile', 'datePost', 'textPost', 'imgPost', 'likesPost');
 
 // # Milestone 3
 // Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
 
+for (const item of posts){
+    const likeButtonElement = document.querySelector(`[data-postid="${item.idPost}"]`);
+    const likeCountElement = document.getElementById(`like-counter-${item.idPost}`);
+
+    likeButtonElement.addEventListener("click", function(){
+        likeButtonElement.classList.add('like-button--liked');
+        likeCountElement.innerText = ++item.likesPost;
+    });
+}
