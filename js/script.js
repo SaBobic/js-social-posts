@@ -56,4 +56,8 @@ const posts = [
 
 const listElement = document.getElementById('container');
 
-listElement.innerHTML = createCard(posts, 'imgProfile', 'nameProfile', 'datePost', 'textPost', 'imgPost', 'likesPost');
+listElement.innerHTML = createCard(posts, 'idPost', 'imgProfile', 'nameProfile', 'datePost', 'textPost', 'imgPost', 'likesPost');
+
+// # Milestone 3
+// Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
+
