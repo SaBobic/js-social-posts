@@ -5,6 +5,7 @@
  * @param {string} date - Chiave dell'oggetto nell'array che restituisce la data.
  * @return {string} La funzione restituisce la data formattata.
  */
+
 const getNewFormatDate = (arr, date) => {
     const oldDate = arr[date];
     
@@ -15,6 +16,28 @@ const getNewFormatDate = (arr, date) => {
     const newDate = `${day}/${month}/${year}`;
 
     return newDate;
+}
+
+//! ---------------------------------------
+
+/**
+ * Funzione per prendere le iniziali di nome e cognome.
+ *
+ * @param {Object[]} arr - Array da cui prendere la data di ciascun post.
+ * @param {string} name - Chiave dell'oggetto nell'array che restituisce la data.
+ * @return {string} La funzione restituisce la data formattata.
+ */
+
+const getInitials = (arr, name) => {
+    const currentName = arr[name];
+    
+    const nameArray = currentName.split(" ")
+
+    const firstNameInit = nameArray[0].slice(0,1);
+    const lastNameInit = nameArray[1].slice(0,1);
+    
+    const nameInitials = `${firstNameInit}${lastNameInit}`;
+    return nameInitials;
 }
 
 //! ---------------------------------------
@@ -32,42 +55,58 @@ const getNewFormatDate = (arr, date) => {
  * @param {number} likes - Likes del post.
  * @return {string} La funzione restituisce la stranga HTML della card montata.
  */
+
 const createCard = (arr, id, pic, name, text, img, likes) => {
 
     let card = "";
     
     for (const item of arr){
+
+        // # BONUS 1
+        // Formattare le date in formato italiano (gg/mm/aaaa).
         const newDate = getNewFormatDate(item, 'datePost');
+        
+        let profilePic = `<img class="profile-pic" src="${item[pic]}" alt="${item[name]}" />`;
+
+        // # BONUS 1
+        // Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente.
+        if (item[pic] === ""){
+            const nameInitials = getInitials(item, 'nameProfile')
+            profilePic = `<div class="profile-pic-default">
+                            <span>${nameInitials}</span>
+                        </div>`;
+        }
 
         card += `
+        
         <div class="post">
             <div class="post__header">
             <div class="post-meta">
-                <div class="post-meta__icon">
-                <img class="profile-pic" src="${item[pic]}" alt="${item[name]}" />
+                    <div class="post-meta__icon">
+                        ${profilePic}
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${item[name]}</div>
+                        <div class="post-meta__time">${newDate}</div>
+                    </div>
                 </div>
-                <div class="post-meta__data">
-                <div class="post-meta__author">${item[name]}</div>
-                <div class="post-meta__time">${newDate}</div>
-                </div>
-            </div>
             </div>
             <div class="post__text">
-            ${item[text]}
+                ${item[text]}
             </div>
             <div class="post__image">
-            <img src="${item[img]}" alt="" />
+                <img src="${item[img]}" alt="" />
             </div>
             <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                <a class="like-button js-like-button" data-postid="${item[id]}">
-                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                    <span class="like-button__label">Mi Piace</span>
-                </a>
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button js-like-button" data-postid="${item[id]}">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">Piace a <b id="like-counter-${item[id]}" class="js-likes-counter">${item[likes]}</b> persone</div>
                 </div>
-                <div class="likes__counter">Piace a <b id="like-counter-${item[id]}" class="js-likes-counter">${item[likes]}</b> persone</div>
-            </div>
             </div>
         </div>
         `;

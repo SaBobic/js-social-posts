@@ -19,7 +19,7 @@ const posts = [
     {
         idPost: 2,
         nameProfile: "Maxine Mayfield",
-        imgProfile: "https://unsplash.it/300/300?image=17",
+        imgProfile: "",
         datePost: "02-20-1986",
         textPost: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         imgPost: "https://unsplash.it/300/200?image=18",
@@ -37,7 +37,7 @@ const posts = [
     {
         idPost: 4,
         nameProfile: "Jane Ives",
-        imgProfile: "https://unsplash.it/300/300?image=22",
+        imgProfile: "",
         datePost: "07-14-1986",
         textPost: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         imgPost: "https://unsplash.it/300/200?image=23",
@@ -73,14 +73,3 @@ for (const item of posts){
         likeCountElement.innerText = ++item.likesPost;
     });
 }
-
-// # BONUS 1
-// Formattare le date in formato italiano (gg/mm/aaaa).
-
-const oldDate = posts[0].datePost;
-
-const day = oldDate.slice(3,5);
-const month = oldDate.slice(0,2);
-const year = oldDate.slice(6);
-
-const newDate = `${day}/${month}/${year}`;
