@@ -1,5 +1,5 @@
 /**
- * Funzione per cambiare il formato della data. Esempio: 01-20-1995 ----> 20/01/1995
+ * Funzione per cambiare il formato della data (mm-gg-yyyy).
  *
  * @param {Object[]} arr - Array da cui prendere la data di ciascun post.
  * @param {string} date - Chiave dell'oggetto nell'array che restituisce la data.
@@ -68,7 +68,7 @@ const createCard = (arr, id, pic, name, text, img, likes) => {
         
         let profilePic = `<img class="profile-pic" src="${item[pic]}" alt="${item[name]}" />`;
 
-        // # BONUS 1
+        // # BONUS 2
         // Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente.
         if (item[pic] === ""){
             const nameInitials = getInitials(item, 'nameProfile')

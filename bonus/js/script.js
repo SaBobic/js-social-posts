@@ -69,7 +69,10 @@ for (const item of posts){
     const likeCountElement = document.getElementById(`like-counter-${item.idPost}`);
 
     likeButtonElement.addEventListener("click", function(){
-        likeButtonElement.classList.add('like-button--liked');
-        likeCountElement.innerText = ++item.likesPost;
+        // # BONUS 3
+        // Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+        likeButtonElement.classList.toggle('like-button--liked');
+        if (likeButtonElement.classList.contains('like-button--liked')) likeCountElement.innerText = ++item.likesPost;
+        else likeCountElement.innerText = --item.likesPost;
     });
 }
