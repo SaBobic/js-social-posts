@@ -1,51 +1,37 @@
 /**
- * Funzione per cambiare il formato della data (mm-gg-yyyy).
+ * Funzione per cambiare il formato della data in quello utilizzado nel paese dell'utente.
  *
- * @param {Object[]} arr - Array da cui prendere la data di ciascun post.
- * @param {string} date - Chiave dell'oggetto nell'array che restituisce la data.
+ * @param {string} date - Variabile/proprietà che racchiude la data da formattare.
  * @return {string} La funzione restituisce la data formattata.
  */
 
-const getNewFormatDate = (arr, date) => {
-    const oldDate = arr[date];
-    
-    const day = oldDate.slice(3,5);
-    const month = oldDate.slice(0,2);
-    const year = oldDate.slice(6);
-    
-    const newDate = `${day}/${month}/${year}`;
-
-    return newDate;
-}
+const getRightFormatDate = date => {
+    const newDate = new Date(date);
+    return newDate.toLocaleDateString();
+};
 
 //! ---------------------------------------
 
 /**
  * Funzione per prendere le iniziali di nome e cognome.
  *
- * @param {Object[]} arr - Array da cui prendere la data di ciascun post.
- * @param {string} name - Chiave dell'oggetto nell'array che restituisce la data.
- * @return {string} La funzione restituisce la data formattata.
+ * @param {string} name - Variabile/proprietà che racchiude nome e cognome dell'utente.
+ * @return {string} La funzione restituisce le iniziali di nome e cognome.
  */
-
-const getInitials = (arr, name) => {
-    const currentName = arr[name];
-    
-    const nameArray = currentName.split(" ")
-
-    const firstNameInit = nameArray[0].slice(0,1);
-    const lastNameInit = nameArray[1].slice(0,1);
-    
-    const nameInitials = `${firstNameInit}${lastNameInit}`;
-    return nameInitials;
-}
+const getInitials = name => {
+    const nameArray = name.split(' ');
+    let initials = '';
+    nameArray.forEach(item => {
+        initials += item[0];
+    });
+    return initials;
+};
 
 //! ---------------------------------------
 
 /**
- * Funzione per creare la card di un post, utilizzando le proprietà dell'array contenente i post
+ * Funzione per creare la card di un post
  *
- * @param {Object[]} arr - Array da cui prendere i parametri dei post.
  * @param {number} id - Numero identificativo del post.
  * @param {string} pic - Immagine del profilo.
  * @param {string} name - Nome del profilo.
@@ -53,64 +39,40 @@ const getInitials = (arr, name) => {
  * @param {string} text - Testo del post.
  * @param {string} img - Immagine del post.
  * @param {number} likes - Likes del post.
- * @return {string} La funzione restituisce la stranga HTML della card montata.
+ * @return {string} La funzione restituisce la stringa HTML della card
  */
 
-const createCard = (arr, id, pic, name, text, img, likes) => {
-
-    let card = "";
-    
-    for (const item of arr){
-
-        // # BONUS 1
-        // Formattare le date in formato italiano (gg/mm/aaaa).
-        const newDate = getNewFormatDate(item, 'datePost');
-        
-        let profilePic = `<img class="profile-pic" src="${item[pic]}" alt="${item[name]}" />`;
-
-        // # BONUS 2
-        // Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente.
-        if (item[pic] === ""){
-            const nameInitials = getInitials(item, 'nameProfile')
-            profilePic = `<div class="profile-pic-default">
-                            <span>${nameInitials}</span>
-                        </div>`;
-        }
-
-        card += `
-        
+const createCard = (id, pic, name, date, text, img, likes) => {
+    return `
         <div class="post">
             <div class="post__header">
             <div class="post-meta">
                     <div class="post-meta__icon">
-                        ${profilePic}
+                        ${pic}
                     </div>
                     <div class="post-meta__data">
-                        <div class="post-meta__author">${item[name]}</div>
-                        <div class="post-meta__time">${newDate}</div>
+                        <div class="post-meta__author">${name}</div>
+                        <div class="post-meta__time">${date}</div>
                     </div>
                 </div>
             </div>
             <div class="post__text">
-                ${item[text]}
+                ${text}
             </div>
             <div class="post__image">
-                <img src="${item[img]}" alt="" />
+                <img src="${img}" alt="" />
             </div>
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button js-like-button" data-postid="${item[id]}">
+                        <a class="like-button js-like-button" href="#" data-postid="${id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
-                    <div class="likes__counter">Piace a <b id="like-counter-${item[id]}" class="js-likes-counter">${item[likes]}</b> persone</div>
+                    <div class="likes__counter">Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone</div>
                 </div>
             </div>
         </div>
         `;
-    }
-
-    return card;
-}
+};

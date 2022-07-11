@@ -31,7 +31,7 @@ h1 {
     margin-bottom: 24px;
 }
 
-.post { 
+.post {
     padding: 16px;
     background-color: white;
 }
@@ -71,7 +71,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0CD977;
+    background-color: #0cd977;
     height: 60px;
     width: 60px;
     overflow: hidden;
@@ -106,14 +106,14 @@ h1 {
 .like-button {
     display: inline-block;
     padding: 16px;
-    border-radius: 8px;    
+    border-radius: 8px;
     text-decoration: none;
     color: #404040;
     cursor: pointer;
 }
 
 .like-button:hover {
-    background-color: #e3e3e3
+    background-color: #e3e3e3;
 }
 
 .like-button__label {
@@ -121,5 +121,5 @@ h1 {
 }
 
 .like-button--liked {
-    color: #0CD977;
+    color: #0cd977;
 }

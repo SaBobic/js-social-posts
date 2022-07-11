@@ -12,9 +12,9 @@
  * @return {string} La funzione restituisce la stranga HTML della card montata.
  */
 const createCard = (arr, id, pic, name, date, text, img, likes) => {
-    let card = "";
+    let card = '';
 
-    for (const item of arr){
+    for (const item of arr) {
         card += `
         <div class="post">
             <div class="post__header">
@@ -50,4 +50,4 @@ const createCard = (arr, id, pic, name, date, text, img, likes) => {
     }
 
     return card;
-}
+};
